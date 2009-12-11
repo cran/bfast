@@ -1,0 +1,27 @@
+Package: bfast
+Version: 1.1
+Date: 2009-12-11
+Title: BFAST: Breaks For Additive Seasonal and Trend
+Author: Jan Verbesselt, with contributions from Rob Hyndman
+        <Rob.Hyndman@buseco.monash.edu.au>
+Maintainer: Jan Verbesselt <Jan.Verbesselt@csiro.au>
+Depends: R (>= 2.0.0), strucchange, MASS, forecast
+Description: BFAST integrates the decomposition of time series into
+        trend, seasonal, and remainder components with methods for
+        detecting and characterizing abrupt changes within the trend
+        and seasonal components. BFAST can be used to analyze different
+        types of satellite image time series and can be applied to
+        other disciplines dealing with seasonal or non-seasonal time
+        series, such as hydrology, climatology, and econometrics. The
+        algorithm can be extended to label detected changes with
+        information on the parameters of the fitted piecewise linear
+        models.
+License: GPL (>= 2)
+URL: http://bfast.R-Forge.R-project.org/
+LazyLoad: yes
+LazyData: yes
+Repository: CRAN
+Repository/R-Forge/Project: bfast
+Repository/R-Forge/Revision: 32
+Date/Publication: 2009-12-14 19:58:44
+Packaged: 2009-12-11 21:13:51 UTC; rforge

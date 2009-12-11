@@ -1,0 +1,20 @@
+citHeader("To cite bfast in publications use")
+
+citEntry(entry = "Article",
+         title = "Detecting Trend and Seasonal Changes in Satellite Image Time Series",
+         author = personList(as.person("Jan Verbesselt"), 
+	                     as.person("Rob Hyndman"),
+	                     as.person("Glenn Newnham"),
+                             as.person("Darius Culvenor")),
+         journal      = "Remote Sensing of Environment",
+         year         = "2010",
+	 volume       = "114",
+	 pages        = "106--115",
+	 doi          = "10.1016/j.rse.2009.08.014",
+         
+         textVersion = 
+         paste("Jan Verbesselt, Rob Hyndman, Glenn Newnham, Darius Culvenor (2010).", 
+               "Detecting Trend and Seasonal Changes in Satellite Image Time Series.",
+	       "Remote Sensing of Environment, 114, 106-115.",
+	       "doi:10.1016/j.rse.2009.08.014"),
+)

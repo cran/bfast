@@ -1,0 +1,6 @@
+export(
+  "bfast"
+)
+
+S3method("plot", "bfast")
+S3method("print", "bfast")
