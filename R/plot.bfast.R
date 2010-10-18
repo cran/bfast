@@ -26,7 +26,7 @@ plot.bfast <- function(x,type=c("components","all","data","seasonal","trend","no
         tsp(ft) <- tsp(x$Yt)
         ft <- list(time.series = ft)
         if(!title) 
-            main <- paste('no. iterations to estimate stable breakpoints:',niter) 
+            main <- paste('no. iterations to estimate breakpoints:',niter) 
         seasonal(ft,out,sim=sim,main=main) # plotting function based on STL structure. How can we use e.g. plot.seasonal ?
     }
     else if(type=="noise")

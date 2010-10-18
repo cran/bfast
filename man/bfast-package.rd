@@ -1,6 +1,6 @@
 \name{bfast-package}
 \alias{bfast-package}
-\Rdversion{1.1}
+\Rdversion{1.2}
 \docType{package}
 \title{
 BFAST (Breaks For Additive Seasonal and Trend)
@@ -29,7 +29,7 @@ Jan Verbesselt and Rob Hyndman
 }
 
 \references{
-Verbesselt, J., R. Hyndman, G. Newnham, and D. Culvenor (In Press). 
+Verbesselt, J., R. Hyndman, G. Newnham, and D. Culvenor (2009). 
 Detecting trend and seasonal changes in satellite image time series. 
 \emph{Remote Sensing of Environment}. \url{http://dx.doi.org/10.1016/j.rse.2009.08.014}. 
 Or see \url{http://robjhyndman.com/papers/bfast1}.

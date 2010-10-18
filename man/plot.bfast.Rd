@@ -1,5 +1,5 @@
 \name{plot.bfast}
-\Rdversion{1.1}
+\Rdversion{1.2}
 \alias{plot.bfast}
 
 \title{
@@ -43,6 +43,8 @@ Jan Verbesselt and Rob Hyndman
 
 \examples{
 ## See \code{\link[bfast]{bfast}} for examples.
+# References
+citation("bfast")
 }
 
 \keyword{ts}

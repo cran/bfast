@@ -18,3 +18,21 @@ citEntry(entry = "Article",
 	       "Remote Sensing of Environment, 114, 106-115.",
 	       "doi:10.1016/j.rse.2009.08.014"),
 )
+
+citEntry(entry = "Article",
+         title = "Phenological change detection while accounting for abrupt and gradual trends in satellite image time series",
+         author = personList(as.person("Jan Verbesselt"), 
+	                     as.person("Rob Hyndman"),
+	                     as.person("Achim Zeileis"),
+                             as.person("Darius Culvenor")),
+         journal      = "Remote Sensing of Environment",
+         year         = "2010",
+	 volume       = "114",
+	 pages        = "2970 - 2980",
+	 doi          = "10.1016/j.rse.2010.08.003",
+         textVersion = 
+         paste("Jan Verbesselt, Rob Hyndman, Achim Zeileis, Darius Culvenor (2010).", 
+               "Phenological change detection while accounting for abrupt and gradual trends in satellite image time series.",
+	       "Remote Sensing of Environment, 114, 2970 - 2980.",
+	       "doi:10.1016/j.rse.2010.08.003"),
+)
