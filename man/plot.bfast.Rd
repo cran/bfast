@@ -1,5 +1,5 @@
 \name{plot.bfast}
-\Rdversion{1.2}
+\Rdversion{1.2-1}
 \alias{plot.bfast}
 
 \title{

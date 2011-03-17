@@ -1,11 +1,4 @@
 bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = NULL, breaks = NULL, hpc = "none")
-# changes
-# 1. max.iteration is now correct - the previous version was doing always doing one iteration extra
-# 2. choose a seasonal model "harmonic" or "dummy"
-# To do:
-# -> add parallell processing potential 
-# -> make bfast faster...somehow by simplying it.
-# -> add examples to extract output from bfast
 {
     season <- match.arg(season)
     ti <- time(Yt)
@@ -21,7 +14,7 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
     
     # seasonal model setup
     if (season=="harmonic") {
-        w <- 1/23      # on cycle every 23 time points (seasonal cycle)
+        w <- 1/f # f = 23 when freq=23 :-)
         tl <- 1:length(Yt)
         co <- cos(2*pi*tl*w); si <- sin(2*pi*tl*w)
         co2 <- cos(2*pi*tl*w*2);si2 <- sin(2*pi*tl*w*2)

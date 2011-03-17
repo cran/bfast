@@ -1,5 +1,5 @@
 \name{bfast}
-\Rdversion{1.2}
+\Rdversion{1.2-1}
 \alias{bfast}
 \title{
 Break detection in the seasonal and trend component of a univariate time series

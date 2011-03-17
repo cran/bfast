@@ -1,10 +1,10 @@
 Package: bfast
-Version: 1.2
-Date: 2010-10-18
+Version: 1.2-1
+Date: 2011-03-17
 Title: BFAST: Breaks For Additive Seasonal and Trend
 Author: Jan Verbesselt, with contributions from Rob Hyndman
         <Rob.Hyndman@buseco.monash.edu.au>
-Maintainer: Jan Verbesselt <Jan.Verbesselt@wur.au>
+Maintainer: Jan Verbesselt <Jan.Verbesselt@wur.nl>
 Depends: R (>= 2.0.0), strucchange, MASS, forecast
 Description: BFAST integrates the decomposition of time series into
         trend, seasonal, and remainder components with methods for
@@ -22,6 +22,6 @@ LazyLoad: yes
 LazyData: yes
 Repository: CRAN
 Repository/R-Forge/Project: bfast
-Repository/R-Forge/Revision: 48
-Date/Publication: 2011-02-25 07:39:59
-Packaged: 2010-11-29 15:53:28 UTC; rforge
+Repository/R-Forge/Revision: 58
+Date/Publication: 2011-04-24 06:06:56
+Packaged: 2011-03-17 21:56:41 UTC; rforge
