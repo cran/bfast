@@ -1,5 +1,4 @@
 \name{simts}
-\Rdversion{1.2-1}
 \alias{simts}
 \docType{data}
 \title{

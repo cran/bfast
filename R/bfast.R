@@ -41,17 +41,17 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
         CheckTimeSt <- Wt.bp
         # TREND
         Vt <- Yt-St
-        p.Vt <- sctest(efp(Vt ~ ti, h=h, type= "OLS-MOSUM"))
-        if (p.Vt$p.value <=0.05) 
-        {
+#         p.Vt <- sctest(efp(Vt ~ ti, h=h, type= "OLS-MOSUM"))
+#         if (p.Vt$p.value <=0.05) 
+#         {
           bp.Vt <- breakpoints(Vt ~ ti, h=h,breaks=breaks, hpc = hpc)
           nobp.Vt <- is.na(breakpoints (bp.Vt)[1])
-        } 
-        else 
-        {
-          nobp.Vt <- TRUE
-          bp.Vt <- NA       
-        }
+#         } 
+#         else 
+#         {
+#           nobp.Vt <- TRUE
+#           bp.Vt <- NA       
+#         }
         if (nobp.Vt)
         {
             fm0 <- rlm(Vt ~  ti)

@@ -1,6 +1,14 @@
+import("graphics", "stats", "strucchange", "zoo", "raster")
+
 export(
-  "bfast"
+  "bfast",
+  "bfastmonitor",
+  "bfastpp",
+  "bfastts"
 )
 
 S3method("plot", "bfast")
 S3method("print", "bfast")
+S3method("plot", "bfastmonitor")
+S3method("print", "bfastmonitor")
+

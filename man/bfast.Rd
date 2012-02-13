@@ -1,18 +1,19 @@
 \name{bfast}
-\Rdversion{1.2-1}
 \alias{bfast}
-\title{
-Break detection in the seasonal and trend component of a univariate time series
-}
+\title{Break Detection in the Seasonal and Trend Component of a Univariate Time Series}
+
 \description{
 Iterative break detection in seasonal and trend component of a time series. 
 Seasonal breaks is a function that combines the iterative decomposition of 
 time series into trend, seasonal and remainder components with significant 
 break detection in the decomposed components of the time series.
 }
+
 \usage{
-bfast(Yt, h = 0.15, season = c("dummy","harmonic","none"),  max.iter = NULL, breaks = NULL, hpc ="none")
+bfast(Yt, h = 0.15, season = c("dummy", "harmonic", "none"),
+  max.iter = NULL, breaks = NULL, hpc = "none")
 }
+
 \arguments{
   \item{Yt}{univariate time series to be analyzed. This should be an object of class "ts" with a frequency greater than one without NA's.
 }
@@ -33,8 +34,9 @@ bfast(Yt, h = 0.15, season = c("dummy","harmonic","none"),  max.iter = NULL, bre
   \item{hpc}{A character specifying the high performance computing support. Default is "none", can be set to "foreach". Install the "foreach" package for hpc support.
 }	
 }
-\details{To be completed.
-}
+
+\details{To be completed.}
+
 \value{
     An object of the class "bfast" is a list with the following elements:
     \item{Yt}{ equals the Yt used as input.}
@@ -58,14 +60,17 @@ bfast(Yt, h = 0.15, season = c("dummy","harmonic","none"),  max.iter = NULL, bre
     \item{magnitude}{ magnitude of the biggest change detected in the trend component}
     \item{Time}{ timing of the biggest change detected in the trend component}
 }
+
 \references{
-Verbesselt, J., R. Hyndman, G. Newnham, and D. Culvenor (2009). 
-Detecting trend and seasonal changes in satellite image time series. 
-\emph{Remote Sensing of Environment}. \url{http://dx.doi.org/10.1016/j.rse.2009.08.014}.
-Verbesselt, J., Hyndman, R., Zeileis, A., & Culvenor, D. (2010).
-Phenological change detection while accounting for abrupt and gradual trends in satellite image time series.
-\emph{Remote Sensing of Environment}, 114, 2970-2980. \url{http://dx.doi.org/10.1016/j.rse.2010.08.003}.
-Or see \url{http://bfast.r-forge.r-project.org/}.
+Verbesselt J, Hyndman R, Newnham G, Culvenor D (2010).
+  Detecting Trend and Seasonal Changes in Satellite Image Time Series.
+  \emph{Remote Sensing of Environment}, \bold{114}(1), 106--115.
+  \url{http://dx.doi.org/10.1016/j.rse.2009.08.014}
+
+Verbesselt J, Hyndman R, Zeileis A, Culvenor D (2010).
+  Phenological Change Detection while Accounting for Abrupt and Gradual Trends in Satellite Image Time Series.
+  \emph{Remote Sensing of Environment}, \bold{114}(12), 2970--2980.
+  \url{http://dx.doi.org/10.1016/j.rse.2010.08.003}
 }
 
 \author{
@@ -76,39 +81,46 @@ Jan Verbesselt
 \code{\link[bfast]{plot.bfast}} for plotting of bfast() results. \cr
 \code{\link[strucchange]{breakpoints}} for more examples and background information about estimation of breakpoints in time series.
 }
+
 \examples{
-# Simulated Data
+## Simulated Data
 plot(simts) # stl object containing simulated NDVI time series
 
 datats <- ts(rowSums(simts$time.series)) # sum of all the components (season,abrupt,remainder)
 tsp(datats) <- tsp(simts$time.series) # assign correct time series attributes
 plot(datats)
 
-fit <- bfast(datats,h=0.15, season="dummy", max.iter=1) 
-plot(fit,sim=simts)
-fit # prints out whether breakpoints are detected in the seasonal and trend component
+#fit <- bfast(datats,h=0.15, season="dummy", max.iter=1) 
+#plot(fit,sim=simts)
+#fit # prints out whether breakpoints are detected in the seasonal and trend component
 
-# Real data
-# The data should be a regular ts() object without NA's
-# See Fig. 8 b in reference
+## Real data
+## The data should be a regular ts() object without NA's
+## See Fig. 8 b in reference
 plot(harvest, ylab="NDVI") # MODIS 16-day cleaned and interpolated NDVI time series 
 
 (rdist <- 10/length(harvest)) # ratio of distance between breaks (time steps) and length of the time series 
-fit <- bfast(harvest,h=rdist, season="harmonic", max.iter=1,breaks=2)
-plot(fit)
-plot(fit,type="trend",largest=TRUE)
-plot(fit,type="all") 
+#fit <- bfast(harvest,h=rdist, season="harmonic", max.iter=1,breaks=2)
+#plot(fit)
 
-# output
-niter <- length(fit$output) # nr of iterations
-out <- fit$output[[niter]]  # output of results of the final fitted seasonal and trend models and nr of breakpoints in both.
+## plot anova and slope of the trend identified trend segments
+#plot(fit, ANOVA=TRUE)
 
-# References
+## plot the trend component and identify the break with the largest magnitude of change
+#plot(fit,type="trend",largest=TRUE)
+
+## plot all the different available plots
+#plot(fit,type="all") 
+
+## output
+#niter <- length(fit$output) # nr of iterations
+#out <- fit$output[[niter]]  # output of results of the final fitted seasonal and trend models and #nr of breakpoints in both.
+
+## References
 citation("bfast")
 
-# For more info
+## For more info
 ?bfast
-
 }
-\keyword{ts}
 
+\keyword{ts}

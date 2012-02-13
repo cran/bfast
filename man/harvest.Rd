@@ -1,5 +1,4 @@
 \name{harvest}
-\Rdversion{1.2-1}
 \alias{harvest}
 \docType{data}
 \title{

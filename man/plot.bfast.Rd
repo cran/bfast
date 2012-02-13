@@ -1,5 +1,5 @@
 \name{plot.bfast}
-\Rdversion{1.2-1}
+\Rdversion{1.4}
 \alias{plot.bfast}
 
 \title{
@@ -10,8 +10,8 @@ Plot methods for objects of class "bfast".
 }
 \usage{
 %%## S3 method for class 'bfast':
-\method{plot}{bfast}(x, type = c("components", "all", "data", "seasonal", "trend", "noise"), 
-    sim = NULL, largest=FALSE, main, ...)
+\method{plot}{bfast}(x, type = c("components", "all", "data", "seasonal",
+"trend", "noise"), sim = NULL, largest=FALSE, main, ANOVA = FALSE, ...)
 }
 
 \arguments{
@@ -19,6 +19,7 @@ Plot methods for objects of class "bfast".
   \item{type}{Indicates the type of plot. See details.}
   \item{sim}{Optional \code{\link[stats]{stl}} object containing the original components used when simulating \code{x}. }
   \item{largest}{If TRUE, show the largest jump in the trend component.}
+  \item{ANOVA}{if TRUE Derive Slope and Significance values for each identified trend segment}
   \item{main}{an overall title for the plot.}
   \item{...}{further arguments passed to the \code{\link[graphics]{plot}} function.}
 }
@@ -38,7 +39,7 @@ If \code{sim} is not \code{NULL}, the components used in simulation are also sho
 }
 
 \author{
-Jan Verbesselt and Rob Hyndman
+Jan Verbesselt, Rob Hyndman and Rogier De Jong
 }
 
 \examples{
