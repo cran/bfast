@@ -59,7 +59,10 @@ bfastmonitor <- function(data, start,
     type = type, period = end, h = h, alpha = level[1])
   test_lm <- lm(formula, data = test_tspp)
   if(floor(h * NROW(test_tspp)) <= 1 | NROW(test_tspp) <= length(coef(test_lm))) {
-    stop("too few observations in selected history period")
+    ok <- FALSE
+    warning("too few observations in selected history period")
+  } else {
+    ok <- TRUE
   }
   if(verbose) {
     cat("Model fit:\n")
@@ -68,22 +71,32 @@ bfastmonitor <- function(data, start,
 
   ## MONITOR CHANGES IN THE MONITORING PERIOD
   test_tspp <- subset(data_tspp, time >= history)
-  test_mon <- monitor(test_mefp, data = test_tspp, verbose = FALSE)
-  tbp <- if(is.na(test_mon$breakpoint)) NA else test_tspp$time[test_mon$breakpoint]
-  if(verbose) {
-    cat("\n\n2. Monitoring period\n")
-    cat(sprintf("Monitoring starts at: %i(%i)\n", floor(start), round((start - floor(start)) * freq) + 1))
-    if(is.na(tbp)) {      
-        cat("Break detected at: -- (no break)\n\n")
-      } else {
-        cat(sprintf("Break detected at: %i(%i)\n\n", floor(tbp), round((tbp - floor(tbp)) * freq) + 1))
+  if(ok) {
+    test_mon <- monitor(test_mefp, data = test_tspp, verbose = FALSE)
+    tbp <- if(is.na(test_mon$breakpoint)) NA else test_tspp$time[test_mon$breakpoint]
+    if(verbose) {
+      cat("\n\n2. Monitoring period\n")
+      cat(sprintf("Monitoring starts at: %i(%i)\n", floor(start), round((start - floor(start)) * freq) + 1))
+      if(is.na(tbp)) {      
+          cat("Break detected at: -- (no break)\n\n")
+        } else {
+          cat(sprintf("Break detected at: %i(%i)\n\n", floor(tbp), round((tbp - floor(tbp)) * freq) + 1))
+      }
     }
+  } else {
+    test_mon <- NA
+    tbp <- NA
   }
   
   ## the magnitude of change
-	test_tspp$prediction <- predict(test_lm, newdata = test_tspp)
-	new_data <- subset(test_tspp, time>=start) ## only data from the monitoring period
-	magnitude <- median(new_data$response - new_data$prediction,na.rm=TRUE)
+  if(ok) {
+    test_tspp$prediction <- predict(test_lm, newdata = test_tspp)
+    new_data <- subset(test_tspp, time>=start) ## only data from the monitoring period
+    magnitude <- median(new_data$response - new_data$prediction,na.rm=TRUE)
+  } else {
+    test_tspp$prediction <- NA
+    magnitude <- NA
+  }
   
   ## set up return object
   rval <- list(

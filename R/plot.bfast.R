@@ -9,6 +9,7 @@ plot.bfast <- function (x, type = c("components", "all", "data", "seasonal",
     "trend", "noise"), sim = NULL, largest = FALSE, main, ANOVA = FALSE, ...) 
 {
     type <- match.arg(type)
+    #  opar <- par()
     realdata <- is.null(sim)
     Trend.bp <- !x$nobp$Vt
     if (type == "largest" & !Trend.bp) 
@@ -102,4 +103,5 @@ plot.bfast <- function (x, type = c("components", "all", "data", "seasonal",
         if (type == "all") 
             par(opar)
     }
+    # par(opar)
 }

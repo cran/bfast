@@ -12,9 +12,9 @@ plot.bfastmonitor <- function(x, na.rm = TRUE, main = TRUE, ylab = "Data", ...)
   plot(y, type = "n", main = main, ylab = ylab, ...)
   lines(window(y, end = x$history[2]), col = "black")
   lines(window(y, start = x$history[1], end = x$history[2]),
-    col = "darkgreen", type = "p", pch = 19, cex = 1)
+    col = "darkgreen", type = "p", pch = 19, cex = 0.5)
   lines(window(y, start = x$monitor[1]), col = "red")
-
+  points(window(y, start = x$monitor[1]), col = "red", pch=19, cex=0.5) # new
   test_pred <- predict(x$model, newdata = x$tspp)
   test_pred <- zoo(test_pred, x$tspp$time, frequency = frequency(y))
   lines(test_pred, col = "blue", lwd = 1.5)

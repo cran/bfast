@@ -49,8 +49,8 @@ bfast(Yt, h = 0.15, season = c("dummy", "harmonic", "none"),
         \code{bp.Vt} \tab output of the \code{\link[strucchange]{breakpoints}} function for the trend model\cr
         \code{ci.Vt} \tab output of the  \code{\link[strucchange]{breakpoints}} confint function for the trend model\cr
         \code{Wt} \tab equals the detrended data \code{Yt - Tt} for each iteration\cr
-        \code{bp.Vt} \tab output of the \code{\link[strucchange]{breakpoints}} function for the seasonal model\cr
-        \code{ci.Vt} \tab output of the  \code{\link[strucchange]{breakpoints}} confint function for the seasonal model
+        \code{bp.Wt} \tab output of the \code{\link[strucchange]{breakpoints}} function for the seasonal model\cr
+        \code{ci.Wt} \tab output of the  \code{\link[strucchange]{breakpoints}} confint function for the seasonal model
     }}
     \item{nobp}{ is a list with the following elements:
     \tabular{ll}{

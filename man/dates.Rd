@@ -17,11 +17,7 @@ Near real-time disturbance detection using satellite image time series.
 
 \examples{
 
-## select modis raster brick data for one pixel out of the raster brick
-## and link it with the dates information.
-
-# ndvi <- bfastts(modisraster[1], dates, type = c("16-day"))
-# plot(ndvi)
+ ## see ?bfastmonitor for examples
 
 }
 \keyword{datasets}

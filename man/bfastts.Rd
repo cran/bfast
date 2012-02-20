@@ -46,11 +46,10 @@ Verbesselt J, Zeileis A, Herold M (2011).
 
 \examples{
 
-#if(require("raster")) {
-#	data <- modisraster[1]
-#	ndvi <- bfastts(data, dates, type = c("16-day"))
-#	plot(ndvi) 
-#}
+require("raster")
+# data <- as.vector(modisstack[1])
+# ndvi <- bfastts(data, dates, type = c("16-day"))
+# plot(ndvi/10000) 
 
 }
 

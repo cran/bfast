@@ -25,7 +25,6 @@ main = NULL, range.bars = FALSE, ..., col.range = "light gray", fit = NULL)
       out <- fit$output[[niter]]  # output of results of the final fitted seasonal and trend models and nr of breakpoints in both.
       out_ANOVA <- array()
       out_breakdates <- array()
-## line below is updated - JV - was causing problems
     if (out$Vt.bp[1] > 0) {breaks <- length(out$Vt.bp) } else {breaks <- 0}  # number of breaks
     if (breaks > 0) {
       breakdates <- out$Vt.bp # breakdates
@@ -122,9 +121,6 @@ main = NULL, range.bars = FALSE, ..., col.range = "light gray", fit = NULL)
     }
     mtext("Time", side = 1, line = 3)
     invisible()
-    #
     if (is.null(fit) == FALSE) { return(data.frame(slope = sl, prob = out_ANOVA))}
-    #if (is.null(fit) == FALSE) { return(sl)}
-    # reset plot layout
     layout(matrix(1))
 }

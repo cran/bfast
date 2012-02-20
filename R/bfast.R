@@ -3,7 +3,7 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
     season <- match.arg(season)
     ti <- time(Yt)
     f <- frequency(Yt)      # on cycle every f time points (seasonal cycle)
-    if(class(harvest)!="ts")
+    if(class(Yt)!="ts")
         stop ("Not a time series object")
     ## return value
     output <- list()
@@ -54,7 +54,7 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
 #         }
         if (nobp.Vt)
         {
-            fm0 <- rlm(Vt ~  ti)
+            fm0 <- lm(Vt ~  ti)
             Vt.bp <- 0      # no breaks times
             Tt <- ts(fitted(fm0))     # Data minus trend
             tsp(Tt) <- tsp(Yt)
@@ -62,7 +62,7 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
         } 
         else
         {
-            fm1 <- rlm(Vt ~ breakfactor(bp.Vt)/ti)
+            fm1 <- lm(Vt ~ breakfactor(bp.Vt)/ti)
             ci.Vt <- confint(bp.Vt, het.err = FALSE)
             Vt.bp <- ci.Vt$confint[,2]
             Tt <- ts(fitted(fm1))     # Data minus trend
@@ -90,7 +90,7 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
     #        }
             if (nobp.Wt)
             {
-                sm0 <- rlm(smod)
+                sm0 <- lm(smod)
                 St <- ts(fitted(sm0))  #  The fitted seasonal component
                 tsp(St) <- tsp(Yt)
                 Wt.bp <- 0             # no seasonal breaks
@@ -98,8 +98,8 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
             } 
             else
             {
-                if(season=="dummy") sm1 <-rlm(Wt ~ -1+D %in% breakfactor(bp.Wt))
-                if(season=="harmonic") sm1 <- rlm(Wt ~ (co+si+co2+si2+co3+si3) %in% breakfactor(bp.Wt)) 
+                if(season=="dummy") sm1 <-lm(Wt ~ -1+D %in% breakfactor(bp.Wt))
+                if(season=="harmonic") sm1 <- lm(Wt ~ (co+si+co2+si2+co3+si3) %in% breakfactor(bp.Wt)) 
                 St <- ts(fitted(sm1))  #  The fitted seasonal component
                 tsp(St) <- tsp(Yt)
                 ci.Wt <- confint(bp.Wt, het.err = FALSE)
