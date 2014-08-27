@@ -64,7 +64,7 @@ bfastmonitor(data, start,
   \code{bfastmonitor} provides monitoring of disturbances (or structural changes) in near
   real-time based on a wide class of time series regression models with optional
   season/trend/autoregressive/covariate terms. See Verbesselt at al. (2011) for details.
-  
+
   Based on a given time series (typically, but not necessarily, with frequency greater than 1),
   the data is first preprocessed for regression modeling. Trend/season/autoregressive/covariate
   terms are (optionally) computed using \code{\link[bfast]{bfastpp}}. Second, the data
@@ -73,7 +73,7 @@ bfastmonitor(data, start,
   Fourth, a regression model is fitted to the preprocessed data in the stable history period.
   Fifth, a monitoring procedure is used to determine whether the observations in the monitoring
   period conform with this stable regression model or whether a change is detected.
-  
+
   The regression model can be specified by the user. The default is to use a linear trend and
   a harmonic season: \code{response ~ trend + harmon}. However, all other terms set up by
   \code{bfastpp} can also be omitted/added, e.g., \code{response ~ 1} (just a constant),
@@ -103,13 +103,10 @@ bfastmonitor(data, start,
 }
 
 \references{
-Verbesselt J, Zeileis A, Herold M (2011).
-  Near Real-Time Disturbance Detection in Terrestrial Ecosystems Using Satellite
-  Image Time Series: Drought Detection in Somalia.
-  Working Paper 2011-18. Working Papers in Economics and Statistics,
-  Research Platform Empirical and Experimental Economics, Universitaet Innsbruck.
-  \url{http://EconPapers.RePEc.org/RePEc:inn:wpaper:2011-18}.
-  Submitted to Remote Sensing and Environment.
+Verbesselt J, Zeileis A, Herold M (2012).
+Near real-time disturbance detection using satellite image time series.
+\emph{Remote Sensing Of Environment}, \bold{123}, 98--108.
+\url{http://dx.doi.org/10.1016/j.rse.2012.02.022}
 }
 
 \author{Achim Zeileis, Jan Verbesselt}
@@ -121,10 +118,11 @@ Verbesselt J, Zeileis A, Herold M (2011).
 ## See Fig. 6 a and b in Verbesselt et al. (2011)
 ## for more information about the data time series and acknowledgements
 
+library(zoo)
 NDVIa <- as.ts(zoo(som$NDVI.a, som$Time))
 plot(NDVIa)
-## apply the bfast monitor function on the data 
-## start of the monitoring period is c(2010, 13) 
+## apply the bfast monitor function on the data
+## start of the monitoring period is c(2010, 13)
 ## and the ROC method is used as a method to automatically identify a stable history
 mona <- bfastmonitor(NDVIa, start = c(2010, 13))
 mona
@@ -150,20 +148,17 @@ bfastmonitor(NDVIb, start = c(2010, 13),
   history = c(2008, 7), order = 4, plot = TRUE)
 
 ## just use a 6th order harmonic model without trend
-mon <- bfastmonitor(NDVIb, formula = response ~ harmon, 
+mon <- bfastmonitor(NDVIb, formula = response ~ harmon,
     start = c(2010, 13), order = 6, plot = TRUE)
 summary(mon$model)
-
-## References
-citation("bfast")
 
 ## For more info
 ?bfastmonitor
 
 
 ## TUTORIAL for processing raster bricks (satellite image time series of 16-day NDVI images)
-require("raster")
 f <- system.file("extdata/modisraster.grd", package="bfast")
+library("raster")
 modisbrick <- brick(f)
 data <- as.vector(modisbrick[1])
 ndvi <- bfastts(data, dates, type = c("16-day"))
@@ -191,9 +186,11 @@ bfm$magnitude
 plot(bfm)
 xbfastmonitor(modisbrick[1], dates) ## helper function applied on one pixel
 
+\dontrun{
 ## apply the bfastmonitor function onto a raster brick
+library(raster)
 timeofbreak <- calc(modisbrick, fun=function(x){
-	res <- t(apply(x, 1, xbfastmonitor, dates))
+  res <- t(apply(x, 1, xbfastmonitor, dates))
 	return(res)
 })
 
@@ -202,6 +199,7 @@ plot(timeofbreak,2) ## magnitude of change
 
 ## create a KMZ file and look at the output
 KML(timeofbreak, "timeofbreak.kmz")
+}
 
 }
 

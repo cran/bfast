@@ -1,15 +1,13 @@
-bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = NULL, breaks = NULL, hpc = "none")
+bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = NULL, breaks = NULL, hpc = "none", level = 0.05, type= "OLS-MOSUM")
 {
     season <- match.arg(season)
+	level = rep(level, length.out = 2)
     ti <- time(Yt)
     f <- frequency(Yt)      # on cycle every f time points (seasonal cycle)
     if(class(Yt)!="ts")
         stop ("Not a time series object")
     ## return value
     output <- list()
-
-    # Start the iterative procedure and for first iteration St=decompose result
-    St <- stl(Yt, "periodic")$time.series[, "seasonal"]
     Tt <- 0
     
     # seasonal model setup
@@ -20,12 +18,18 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
         co2 <- cos(2*pi*tl*w*2);si2 <- sin(2*pi*tl*w*2)
         co3 <- cos(2*pi*tl*w*3);si3 <- sin(2*pi*tl*w*3)
         smod <- Wt ~ co+si+co2+si2+co3+si3
+        # Start the iterative procedure and for first iteration St=decompose result
+        St <- stl(Yt, "periodic")$time.series[, "seasonal"]
+        
     } else if (season=="dummy") {
+        # Start the iterative procedure and for first iteration St=decompose result
+        St <- stl(Yt, "periodic")$time.series[, "seasonal"]
         D <- seasonaldummy(Yt)
-        D[rowSums(D)==0,] <- -1
-        smod <- Wt ~ -1+D
-    } else if (season=="none") {
-        #print("No seasonal model will be fitted!")
+        D[rowSums(D) == 0,] <- -1
+        smod <- Wt ~ -1 + D
+    } else if (season == "none") {
+        print("No seasonal model will be fitted!")
+        St <- 0
     } else stop("Not a correct seasonal model is selected ('harmonic' or 'dummy') ")
     
     # number/timing of structural breaks in the trend/seasonal component
@@ -33,7 +37,6 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
     Wt.bp <- 0 
     CheckTimeTt <- 1
     CheckTimeSt <- 1
-    
     i <- 0
     while ( (!identical(CheckTimeTt,Vt.bp) | !identical(CheckTimeSt,Wt.bp)) & i < max.iter)
     {
@@ -41,17 +44,17 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
         CheckTimeSt <- Wt.bp
         # TREND
         Vt <- Yt-St
-#         p.Vt <- sctest(efp(Vt ~ ti, h=h, type= "OLS-MOSUM"))
-#         if (p.Vt$p.value <=0.05) 
-#         {
+        p.Vt <- sctest(efp(Vt ~ ti, h=h, type=type))
+        if (p.Vt$p.value <= level[1]) 
+        {
           bp.Vt <- breakpoints(Vt ~ ti, h=h,breaks=breaks, hpc = hpc)
           nobp.Vt <- is.na(breakpoints (bp.Vt)[1])
-#         } 
-#         else 
-#         {
-#           nobp.Vt <- TRUE
-#           bp.Vt <- NA       
-#         }
+        } 
+        else 
+        {
+          nobp.Vt <- TRUE
+          bp.Vt <- NA       
+        }
         if (nobp.Vt)
         {
             fm0 <- lm(Vt ~  ti)
@@ -77,17 +80,17 @@ bfast <- function(Yt, h=0.15, season =c("dummy","harmonic","none"), max.iter = N
         } else
         {
             Wt <- Yt-Tt
-    #        p.Wt <- sctest(efp(smod, h=h, type= "OLS-MOSUM"))      # preliminary test 
-    #        if (p.Wt$p.value <=0.05) # OR statement 
-    #        {
+           p.Wt <- sctest(efp(smod, h=h, type=type))      # preliminary test 
+           if (p.Wt$p.value <= level[2]) # OR statement 
+           {
                 bp.Wt <- breakpoints(smod, h=h,breaks=breaks, hpc = hpc) # Breakpoints in the seasonal component
                 nobp.Wt <- is.na(breakpoints (bp.Wt)[1])
-    #        } 
-    #        else 
-    #        {
-    #            nobp.Wt <- TRUE
-    #            bp.Wt <- NA       
-    #        }
+           } 
+           else 
+           {
+               nobp.Wt <- TRUE
+               bp.Wt <- NA       
+           }
             if (nobp.Wt)
             {
                 sm0 <- lm(smod)

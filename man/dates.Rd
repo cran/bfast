@@ -16,8 +16,6 @@ Near real-time disturbance detection using satellite image time series.
 }
 
 \examples{
-
- ## see ?bfastmonitor for examples
-
+## see ?bfastmonitor for examples
 }
 \keyword{datasets}

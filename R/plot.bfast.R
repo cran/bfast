@@ -37,7 +37,6 @@ plot.bfast <- function (x, type = c("components", "all", "data", "seasonal",
         else { seasonal(ft, out, sim = sim, main = main) }
     }
     else if (type == "noise") {
-        require(forecast)
         if (!title) 
             main <- "Noise component"
         tsdisplay(noise, main = main, ...)

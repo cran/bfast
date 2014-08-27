@@ -2,9 +2,7 @@
 ## to do solve the issue of 29 Februari
 ## to do and functionality for other types of time series
 ## e.g. 10 day or 16 day time series
-bfastts <- function(data, 
-										dates, 
-										type = c("irregular", "16-day")) {
+bfastts <- function(data,dates, type = c("irregular", "16-day", "10-day")) {
 	
 	yday365 <- function(x) {
 		x <- as.POSIXlt(x)
@@ -24,6 +22,13 @@ bfastts <- function(data,
 		zz <- aggregate(z, yr + (jul - 1) / delta / 23)
 	}
 	
+	if (type == "10-day") {
+	  tz <- as.POSIXlt(dates)
+	  zz <- zoo(data,
+	           1900L + tz$year + round((tz$yday - 1L)/ 10L)/36L,
+	           frequency = 36L)
+	}
+  
 	tso <- as.ts(zz)
 	return(tso)
 }

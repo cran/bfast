@@ -3,7 +3,7 @@
 \title{Breaks For Additive Season and Trend (BFAST)}
 
 \description{
-BFAST integrates the decomposition of time series into trend, seasonal, and remainder 
+BFAST integrates the decomposition of time series into trend, seasonal, and remainder
 components with methods for detecting and characterizing abrupt changes within the trend and
 seasonal components. BFAST can be used to analyze different types of satellite image time
 series and can be applied to other disciplines dealing with seasonal or non-seasonal time
@@ -38,6 +38,11 @@ Jan Verbesselt [aut, cre], Achim Zeileis [aut], Rob Hyndman [ctb], Rogier De Jon
 }
 
 \references{
+Verbesselt J, Zeileis A, Herold M (2012).
+  Near real-time disturbance detection using satellite image time series.
+  \emph{Remote Sensing of Environment}, \bold{123}, 98--108.
+  \url{http://dx.doi.org/10.1016/j.rse.2012.02.022}
+
 Verbesselt J, Hyndman R, Newnham G, Culvenor D (2010).
   Detecting Trend and Seasonal Changes in Satellite Image Time Series.
   \emph{Remote Sensing of Environment}, \bold{114}(1), 106--115.
@@ -48,13 +53,6 @@ Verbesselt J, Hyndman R, Zeileis A, Culvenor D (2010).
   \emph{Remote Sensing of Environment}, \bold{114}(12), 2970--2980.
   \url{http://dx.doi.org/10.1016/j.rse.2010.08.003}
 
-Verbesselt J, Zeileis A, Herold M (2011).
-  Near Real-Time Disturbance Detection in Terrestrial Ecosystems Using Satellite
-  Image Time Series: Drought Detection in Somalia.
-  Working Paper 2011-18. Working Papers in Economics and Statistics,
-  Research Platform Empirical and Experimental Economics, Universitaet Innsbruck.
-  \url{http://EconPapers.RePEc.org/RePEc:inn:wpaper:2011-18}.
-  Submitted to Remote Sensing and Environment.
 }
 
 \keyword{ts}

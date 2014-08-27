@@ -72,6 +72,7 @@ Verbesselt J, Zeileis A, Herold M (2011).
 
 \examples{
 ## set up time series
+library(zoo)
 ndvi <- as.ts(zoo(cbind(a = som$NDVI.a, b = som$NDVI.b), som$Time))
 ndvi <- window(ndvi, start = c(2006, 1), end = c(2009, 23))
 
