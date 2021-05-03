@@ -57,7 +57,7 @@ main = NULL, range.bars = FALSE, ..., col.range = "light gray", fit = NULL)
         plot(X[, i], col = if(i == 1) "black"
            else "red",
           ylim = if (i == 1 | i == 3)
-            range(X[, 1])
+            range(X[, 1], na.rm = TRUE)
         else range(X[, i], sim$time.series[, i - 1], na.rm = TRUE),
             type = if (i < nplot)
                 "l"
@@ -93,7 +93,8 @@ main = NULL, range.bars = FALSE, ..., col.range = "light gray", fit = NULL)
             if(is.null(fit) == FALSE) {
               for(m in 1:(breaks+1)) {
                 # coordinates based on start time series and breakpoints
-                x_coor <-  out$bp.Wt$datatsp[[1]]
+                # x_coor <-  out$bp.Wt$datatsp[[1]]
+                x_coor <- tsp(out$Wt)[1]
                 if(m > 1) { x_coor <- x_coor + breakdates[[m-1]] /
                               frequency(fit$Yt) }
                 y_range <- range(X[, 1])
