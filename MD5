@@ -1,6 +1,6 @@
-f4eb71ba868ae05e1344e7065278c85d *DESCRIPTION
+7dce7417a2a516790423b0ed59a44700 *DESCRIPTION
 acaf32582b6f56b8afd127c15ba313f9 *NAMESPACE
-ef60bdf6460e5e55e403bd4539673ce7 *NEWS
+1a8a3234427f0d8e40ae9950aa2a0a92 *NEWS
 3b61295a783c9c8ad491ed3c232c3a16 *R/RcppExports.R
 1c2ff568d70210e05c24736dfbe9c419 *R/bfast-deprecated.R
 3de0bbb0c56cae424124e51e326d7e4a *R/bfast-package.R
@@ -20,7 +20,7 @@ a1775a90f272533a749f291e1a23efcd *R/plot.bfastmonitor.R
 fada9ed2422cb04d4986ffaae350ea2f *R/print.bfastmonitor.R
 646472e96fa878060e5653fdb2cee6e0 *R/seasonal.R
 9bae0596d92cfa111da456d077708cf9 *R/zzz.R
-81b46e18d69229fcbdedeacda54c8285 *build/partial.rdb
+c45dfd229d7972cafa4c43b75bba31c8 *build/partial.rdb
 125663b84c01f6177719ed2a38f133f0 *data/harvest.rda
 019ebe3c955a9dd7447a0a5509b2dc57 *data/ndvi.rda
 527c5e49fa93f27152234b300852ba35 *data/simts.rda
@@ -56,5 +56,5 @@ f29d534bfa842c8b43c77b365dc0b07e *man/plot.bfastlite.Rd
 60fe846512f400b62b2f5f1151d99bb7 *man/simts.Rd
 e163dc5f5ffc475aa4959775d5cdf51d *man/som.Rd
 535ac67b7c336c4ef0b8087d9b51a044 *src/RcppExports.cpp
-543489dd810d26179a45f7406f6f89f9 *src/bfastts.cpp
+f5bb8a473a5d27c886b7bdd37c60c2c1 *src/bfastts.cpp
 345a5f896f410f070afd39063c77622c *tests/Examples/bfast-Ex.Rout.save
