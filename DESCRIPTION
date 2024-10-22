@@ -1,14 +1,14 @@
 Package: bfast
-Version: 1.6.1
+Version: 1.7.0
 Title: Breaks for Additive Season and Trend
 Authors@R: c(person(given = "Jan", family = "Verbesselt", role = c("aut"), email = "Jan.Verbesselt@wur.nl"),
-             person(given = "Dainius", family = "Masiliunas", role = c("aut", "cre"),
+             person(given = "Dainius", family = "Masili\u016Bnas", role = c("aut", "cre"),
              email = "pastas4@gmail.com", comment = c(ORCID = "0000-0001-5654-1277")),
              person(given = "Achim", family = "Zeileis", role = "aut", email = "Achim.Zeileis@R-project.org"),
              person(given = "Rob", family = "Hyndman", role = "ctb", email = "Rob.Hyndman@buseco.monash.edu.au"),
              person(given = "Marius", family = "Appel", role = "aut", email = "marius.appel@uni-muenster.de"),
              person(given = "Martin", family = "Jung", role = "ctb", email = "m.jung@sussex.ac.uk"),
-             person(given = "Andrei", family = "Mirt", role = "ctb", email = "andrei.mirt@wur.nl",
+             person(given = "Andrei", family = "M\u00EEr\u021B", role = "ctb", email = "andrei.mirt@wur.nl",
                     comment = c(ORCID = "0000-0003-3654-2090")),
              person(given = c("Paulo", "Negri"), family = "Bernardino", role = "ctb",
                     email = "paulo.negribernardino@wur.nl"),
@@ -30,29 +30,30 @@ Description: Decomposition of time series into
     without interpolation, and will be described in an upcoming paper.
     Furthermore, different models can now be used to fit the
     time series data and detect structural changes (breaks).
-Depends: R (>= 3.0.0), strucchangeRcpp
+Depends: R (>= 3.0.0), strucchangeRcpp (>= 1.5-4)
 Imports: graphics, stats, zoo, forecast, Rcpp (>= 0.12.7), Rdpack (>=
         0.7)
-Suggests: MASS, sfsmisc, stlplus, raster
+Suggests: MASS, sfsmisc, stlplus, terra
 License: GPL (>= 2)
 URL: https://bfast2.github.io/
 BugReports: https://github.com/bfast2/bfast/issues
 LazyLoad: yes
 LazyData: yes
 LinkingTo: Rcpp
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 RdMacros: Rdpack
+Encoding: UTF-8
 NeedsCompilation: yes
-Packaged: 2021-05-06 16:18:40 UTC; dainius
+Packaged: 2024-10-22 08:51:57 UTC; dainius
 Author: Jan Verbesselt [aut],
-  Dainius Masiliunas [aut, cre] (<https://orcid.org/0000-0001-5654-1277>),
+  Dainius Masiliūnas [aut, cre] (<https://orcid.org/0000-0001-5654-1277>),
   Achim Zeileis [aut],
   Rob Hyndman [ctb],
   Marius Appel [aut],
   Martin Jung [ctb],
-  Andrei Mirt [ctb] (<https://orcid.org/0000-0003-3654-2090>),
+  Andrei Mîrț [ctb] (<https://orcid.org/0000-0003-3654-2090>),
   Paulo Negri Bernardino [ctb],
   Dongdong Kong [ctb] (<https://orcid.org/0000-0003-1836-8172>)
-Maintainer: Dainius Masiliunas <pastas4@gmail.com>
+Maintainer: Dainius Masiliūnas <pastas4@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-05-10 14:12:11 UTC
+Date/Publication: 2024-10-22 10:10:02 UTC

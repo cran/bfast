@@ -1,3 +1,24 @@
+Changes in Version 1.7.0
+
+  o Added the option to run a structural change test before running bfastlite()
+  with two parameters: 'level' and 'type', equivalent to bfast() except that
+  anything equal to or below 0 in 'level' will skip the sctest.
+
+  o Fixed a bug where bfastpp() would throw an error when annual data is input.
+  
+  o Rework of the 'breaks' argument in bfast(), it now works correctly with a
+  numeric input and gives the opportunity to specify the breaks/statistic for
+  computing the optimal number of breaks separately per component.
+
+  o Added a reference to the paper describing the BFAST Lite algorithm, and
+  updated author names to use the proper UTF-8 symbols.
+
+  o Updated the examples, migrating from the 'raster' to the 'terra' package,
+  and adding a raster procesing example into '?bfastlite'.
+  
+  o The 'history_roc()' generic is now consistent in parameters with the
+  'history_roc.matrix()' and 'history_roc.formula()' methods.
+
 Changes in Version 1.6.1
 
   o Fixed a heap overflow issue in the C++ version of bfastts().

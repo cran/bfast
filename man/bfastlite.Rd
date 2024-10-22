@@ -16,6 +16,9 @@ bfastlite(
   stl = c("none", "trend", "seasonal", "both"),
   decomp = c("stl", "stlplus"),
   sbins = 1,
+  h = 0.15,
+  level = 0,
+  type = "OLS-MOSUM",
   ...
 )
 
@@ -30,6 +33,9 @@ bfast0n(
   stl = c("none", "trend", "seasonal", "both"),
   decomp = c("stl", "stlplus"),
   sbins = 1,
+  h = 0.15,
+  level = 0,
+  type = "OLS-MOSUM",
   ...
 )
 }
@@ -45,7 +51,7 @@ greater than 1 is required.}
 
 \item{breaks}{either a positive integer specifying the maximal number of breaks to be calculated,
     or a string specifying the information criterion to use to automatically determine
-    the optimal number of breaks (see also \code{\link{logLik}}.
+    the optimal number of breaks (see also \code{\link{logLik}}).
     \code{"all"} means the maximal number allowed by \code{h} is used.
     \code{NULL} is treated as the default of the \code{breakpoints} function (i.e. BIC).}
 
@@ -72,13 +78,27 @@ sets the number of seasonal dummies to use per year.
 If <= 1, treated as a multiplier to the number of observations per year, i.e.
 \code{ndummies = nobs/year * sbins}.}
 
+\item{h}{minimal segment size either given as fraction relative to the
+    sample size or as an integer giving the minimal number of observations
+    in each segment.}
+
+\item{level}{numeric; threshold value for the \link[strucchangeRcpp]{sctest.efp}
+test for at least one break in a time series, to save processing time for
+no-change areas. The test is skipped if set to <= 0.}
+
+\item{type}{character, indicating the type argument to
+\link[strucchangeRcpp]{efp}.}
+
 \item{...}{Additional arguments to \code{\link[strucchangeRcpp]{breakpoints}}.}
 }
 \value{
-An object of class \code{bfastlite}, with two elements:
+An object of class \code{bfastlite}, with three elements:
 \item{breakpoints}{output from \code{\link[strucchangeRcpp]{breakpoints}},
 containing information about the estimated breakpoints.}
 \item{data_pp}{preprocessed data as output by \code{\link{bfastpp}}.}
+\item{sctest}{output from \code{\link[strucchangeRcpp]{sctest.efp}},
+contatining information about the likelihood of the time series
+having at least one break.}
 }
 \description{
 A combination of \code{\link{bfastpp}} and \code{\link[strucchangeRcpp]{breakpoints}}
@@ -107,6 +127,47 @@ strucchangeRcpp::breakpoints(bp[["breakpoints"]], breaks = 2)
 
 # Plot including magnitude based on RMSD for the cos1 component of harmonics
 plot(bp, magstat = "RMSD", magcomp = "harmoncos1", breaks = 2)
+
+# Try with a structural change test
+bp <- bfastlite(datats, level=0.05)
+print(bp)
+plot(bp)
+
+# Details of the structural change test with the type RE
+bfastlite(datats, level=0.05, type="RE")$sctest
+
+\donttest{
+## Run bfastlite() on a raster
+f <- system.file("extdata/modisraster.tif", package="bfast")
+modisbrick <- terra::rast(f)
+
+# Run on pixel 10
+data <- unlist(modisbrick[10])
+ndvi <- bfastts(data, dates, type = c("16-day"))
+bfl <- bfastlite(ndvi, breaks = "BIC")
+# Get max magnitude by RMSD
+max(magnitude(bfl[["breakpoints"]])$Mag[,"RMSD"])
+
+# Wrapper function
+bflSpatial <- function(pixels)
+{
+    ts <- bfastts(pixels, dates, type = c("16-day"))
+    bfl <- bfastlite(ts, breaks="BIC")
+    bp <- bfl[["breakpoints"]]
+    # Return number of breakpoints and max breakpoint magnitude
+    if (length(bp[["breakpoints"]]) == 1 && is.na(bp[["breakpoints"]]))
+        return(c(0, 0))
+    
+    return(c(length(bp[["breakpoints"]]), max(magnitude(bp)$Mag[,"RMSD"])))
+}
+
+# Run function on each raster pixel
+rastbfl <- terra::app(modisbrick, bflSpatial)
+terra::plot(rastbfl)
+}
+}
+\references{
+\insertRef{dainiusbfastlite}{bfast}
 }
 \author{
 Dainius Masiliunas, Jan Verbesselt
